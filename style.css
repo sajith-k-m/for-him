@@ -104,20 +104,18 @@ body {
 }
 
 .container {
-    width: 90%;
-    max-width: 500px;
-    height: 90vh;
-    /* Slightly smaller to see bg */
+    width: 100%;
+    max-width: 600px;
+    height: 100vh;
     position: relative;
     z-index: 10;
 
-    /* Glassmorphism */
-    background: var(--glass-bg);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 2px solid var(--glass-border);
-    border-radius: 25px;
-    box-shadow: 0 8px 32px 0 rgba(255, 77, 109, 0.2);
+    /* Removed Glassmorphism Box */
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    box-shadow: none;
 
     overflow-y: auto;
     overflow-x: hidden;
