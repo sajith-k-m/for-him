@@ -515,3 +515,33 @@ h2.letter-title {
         margin: 0 auto;
     }
 }
+
+/* Scroll Reveal Section */
+.scroll-reveal-container {
+    margin: 40px 0;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    /* Ensure height for scroll */
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scroll-reveal-text {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    line-height: 1.6;
+    font-weight: 700;
+    color: var(--text-color);
+    text-align: center;
+    font-family: var(--font-heading);
+}
+
+.word {
+    display: inline-block;
+    margin-right: 0.25em;
+    opacity: 0.1;
+    filter: blur(4px);
+    transform-origin: center center;
+}

@@ -156,3 +156,109 @@ createFloatingHearts();
 // Start at proposal
 showPage('proposal');
 
+
+// --- Scroll Reveal Logic (GSAP) ---
+let isScrollRevealInitialized = false;
+
+function initScrollReveal() {
+    if (isScrollRevealInitialized) {
+        ScrollTrigger.refresh();
+        return;
+    }
+
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        console.warn('GSAP not loaded');
+        return;
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const container = document.querySelector('.scroll-reveal-container');
+    const textEl = document.querySelector('.scroll-reveal-text');
+    const scroller = document.querySelector('.container'); // The scrolling element
+
+    if (!container || !textEl || !scroller) return;
+
+    // Split text into words
+    const text = textEl.textContent.trim();
+    textEl.innerHTML = '';
+    const words = text.split(/\s+/);
+
+    words.forEach(word => {
+        const span = document.createElement('span');
+        span.className = 'word';
+        span.textContent = word + ' ';
+        textEl.appendChild(span);
+    });
+
+    const wordElements = textEl.querySelectorAll('.word');
+
+    // 1. Rotation Animation
+    gsap.fromTo(
+        textEl,
+        { transformOrigin: '0% 50%', rotation: 3 },
+        {
+            ease: 'none',
+            rotation: 0,
+            scrollTrigger: {
+                trigger: container,
+                scroller: scroller,
+                start: 'top bottom',
+                end: 'bottom bottom',
+                scrub: true
+            }
+        }
+    );
+
+    // 2. Opacity Animation
+    gsap.fromTo(
+        wordElements,
+        { opacity: 0.1, willChange: 'opacity' },
+        {
+            ease: 'none',
+            opacity: 1,
+            stagger: 0.05,
+            scrollTrigger: {
+                trigger: container,
+                scroller: scroller,
+                start: 'top 80%', // Start when top of container hits 80% viewport height
+                end: 'bottom 60%',
+                scrub: true
+            }
+        }
+    );
+
+    // 3. Blur Animation
+    gsap.fromTo(
+        wordElements,
+        { filter: 'blur(4px)' },
+        {
+            ease: 'none',
+            filter: 'blur(0px)',
+            stagger: 0.05,
+            scrollTrigger: {
+                trigger: container,
+                scroller: scroller,
+                start: 'top 80%',
+                end: 'bottom 60%',
+                scrub: true
+            }
+        }
+    );
+
+    isScrollRevealInitialized = true;
+}
+
+// Hook into navigation
+const originalShowPage = showPage;
+// We don't override showPage directly because it's used internally.
+// Instead, let's just add listener to the specific transition.
+
+btnToLetter.addEventListener('click', () => {
+    // Wait for page transition to finish (0.6s) before refreshing/initializing scrolltrigger
+    setTimeout(() => {
+        initScrollReveal();
+    }, 700);
+});
+
+
