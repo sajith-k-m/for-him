@@ -42,7 +42,7 @@ btnYes.addEventListener('click', () => {
 function moveButton() {
     const x = Math.random() * (window.innerWidth - btnNo.offsetWidth - 40); // 40px buffer
     const y = Math.random() * (window.innerHeight - btnNo.offsetHeight - 40);
-    
+
     btnNo.style.position = 'absolute';
     btnNo.style.left = `${x}px`;
     btnNo.style.top = `${y}px`;
@@ -67,7 +67,7 @@ btnToLetter.addEventListener('click', () => {
 // 3. Letter Page (Heart Click)
 heartTrigger.addEventListener('click', () => {
     showPage('heartAnimation');
-    
+
     // Auto transition after animation
     setTimeout(() => {
         showPage('lock');
@@ -85,7 +85,7 @@ pinInputs.forEach((input, index) => {
                 pinInputs[index + 1].focus();
             }
         }
-        
+
         // Backspace focus prev
         if (e.key === 'Backspace') {
             if (index > 0) {
@@ -122,6 +122,37 @@ function checkPin() {
     }
 }
 
+// Floating Hearts Animation
+function createFloatingHearts() {
+    const container = document.getElementById('bg-hearts');
+    const heartCount = 15; // Number of concurrent hearts
+
+    for (let i = 0; i < heartCount; i++) {
+        setTimeout(() => {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerHTML = '❤️';
+
+            // Random positioning
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 5 + 10) + 's'; // 10-15s
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px'; // 10-30px
+
+            container.appendChild(heart);
+
+            // Cleanup after animation to prevent DOM bloat (indefinite loop simulation)
+            heart.addEventListener('animationiteration', () => {
+                heart.style.left = Math.random() * 100 + 'vw';
+            });
+
+        }, i * 1000); // Stagger start
+    }
+}
+
 // Initialize
+// Create background hearts
+createFloatingHearts();
+
 // Start at proposal
 showPage('proposal');
+
