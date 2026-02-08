@@ -1,27 +1,23 @@
-/* Global Styles */
 :root {
-    --primary-color: #ff4d6d;
-    --secondary-color: #ff8fa3;
-    --bg-color-1: #ffe5ec;
-    --bg-color-2: #ffc2d1;
+    --primary-color: #ff0050;
+    /* Deeper Red-Pink */
+    --secondary-color: #ff6b81;
+    --bg-color-1: #ff9a9e;
+    --bg-color-2: #fecfef;
+    --bg-color-3: #feada6;
     --text-color: #590d22;
     --white: #ffffff;
-    --glass-bg: rgba(255, 255, 255, 0.6);
-    --glass-border: rgba(255, 255, 255, 0.8);
+    --glass-bg: rgba(255, 255, 255, 0.5);
+    /* More transparent for color to show */
+    --glass-border: rgba(255, 255, 255, 0.7);
     --font-heading: 'Dancing Script', cursive;
     --font-body: 'Poppins', sans-serif;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    background: linear-gradient(45deg, var(--bg-color-1), var(--bg-color-2), #fff0f3);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+    background: linear-gradient(135deg, var(--bg-color-1), var(--bg-color-2), var(--bg-color-3), #a18cd1);
+    background-size: 300% 300%;
+    animation: gradientBG 10s ease infinite;
     font-family: var(--font-body);
     color: var(--text-color);
     display: flex;
@@ -60,9 +56,31 @@ body {
 .floating-heart {
     position: absolute;
     bottom: -20px;
-    color: rgba(255, 77, 109, 0.3);
+    color: rgba(255, 255, 255, 0.6);
+    /* White-ish hearts for contrast */
     font-size: 20px;
     animation: floatUp 15s linear infinite;
+    text-shadow: 0 0 5px rgba(255, 0, 80, 0.5);
+}
+
+.click-heart {
+    position: absolute;
+    font-size: 1.5rem;
+    pointer-events: none;
+    animation: burstOut 1s ease-out forwards;
+    z-index: 9999;
+}
+
+@keyframes burstOut {
+    0% {
+        opacity: 1;
+        transform: scale(0) translate(0, 0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(2) translate(var(--tx), var(--ty));
+    }
 }
 
 @keyframes floatUp {
@@ -258,28 +276,37 @@ h2.letter-title {
 }
 
 .letter-content {
-    background: #fffdf5;
-    /* Off-white paper color */
-    background-image:
-        radial-gradient(#f0e6d2 1px, transparent 1px),
-        repeating-linear-gradient(#f0e6d2 0 1px, transparent 1px 100%);
-    /* Subtle texture */
+    background-color: #fcf5e5;
+    /* Slightly warmer paper color */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    background-size: 100% 2.2rem;
+    /* The height of each line */
+    background-attachment: local;
+    /* Scrolls with text */
 
-    padding: 30px;
+    padding: 2.2rem 30px 30px 30px;
+    /* Top padding matches line height to start on a line */
     border-radius: 5px;
     box-shadow:
         1px 1px 0 rgba(0, 0, 0, 0.1),
         3px 3px 0 rgba(0, 0, 0, 0.1),
         0 10px 20px rgba(0, 0, 0, 0.1);
 
-    line-height: 1.6;
-    font-size: 1.4rem;
-    text-align: justify;
+    line-height: 2.2rem;
+    /* Matches background-size exactly */
+    font-size: 1.5rem;
+    /* Comfortably large for handwriting */
+    text-align: left;
+    /* Left align looks more natural for handwriting */
     margin-bottom: 30px;
     position: relative;
     border: none;
     transform: rotate(-1deg);
     font-family: var(--font-heading);
+    color: #4a4a4a;
+    /* Slightly softer ink color, or keep original? Original was dark red */
+    color: var(--text-color);
+    /* Keeping original theme color */
 }
 
 /* Tape effect */
