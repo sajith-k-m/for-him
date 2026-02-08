@@ -275,36 +275,39 @@ h2.letter-title {
 
 .letter-content {
     background-color: #fcf5e5;
-    /* Slightly warmer paper color */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
-    background-size: 100% 2.2rem;
-    /* The height of each line */
+    /* Gradient for lines: line at the very bottom of every 32px block */
+    background-image: linear-gradient(to bottom, transparent, transparent 31px, rgba(0, 0, 0, 0.1) 31px, rgba(0, 0, 0, 0.1) 32px);
+    background-size: 100% 32px;
     background-attachment: local;
-    /* Scrolls with text */
 
-    padding: 2.2rem 30px 30px 30px;
-    /* Top padding matches line height to start on a line */
+    /* 
+       Line Height: 32px
+       Font Size: 1.5rem (24px)
+       Padding Top: Needs to place the first baseline on the first line (at 32px).
+       With line-height 32px, text is centered vertically in the line box.
+       (32 - 24) / 2 = 4px space on top.
+       So content starts at 0, text starts at 4px.
+       Baseline of 24px font is approx at 20px from top of em box?
+       Let's try padding-top: 32px (one full empty line) + a nudge.
+       If we use 34px, the text moves down 2px.
+    */
+    padding: 34px 30px 30px 30px;
+
     border-radius: 5px;
     box-shadow:
         1px 1px 0 rgba(0, 0, 0, 0.1),
         3px 3px 0 rgba(0, 0, 0, 0.1),
         0 10px 20px rgba(0, 0, 0, 0.1);
 
-    line-height: 2.2rem;
-    /* Matches background-size exactly */
+    line-height: 32px;
     font-size: 1.5rem;
-    /* Comfortably large for handwriting */
     text-align: left;
-    /* Left align looks more natural for handwriting */
     margin-bottom: 30px;
     position: relative;
     border: none;
     transform: rotate(-1deg);
     font-family: var(--font-heading);
-    color: #4a4a4a;
-    /* Slightly softer ink color, or keep original? Original was dark red */
     color: var(--text-color);
-    /* Keeping original theme color */
 }
 
 /* Tape effect */
@@ -323,7 +326,9 @@ h2.letter-title {
 }
 
 .letter-content p {
-    margin-bottom: 15px;
+    margin-bottom: 32px;
+    /* One line height exactly */
+    margin-top: 0;
 }
 
 .interaction-area {
