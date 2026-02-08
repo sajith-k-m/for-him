@@ -16,7 +16,7 @@ const pinInputs = document.querySelectorAll('.pin-digit');
 const errorMsg = document.getElementById('error-msg');
 
 let currentPin = '';
-const CORRECT_PIN = '1430';
+const CORRECT_PIN = '2706';
 
 // Navigation Function
 function showPage(pageId) {
@@ -88,23 +88,28 @@ heartTrigger.addEventListener('click', () => {
 
 // 4. Lock Screen
 pinInputs.forEach((input, index) => {
-    input.addEventListener('keyup', (e) => {
-        // Auto focus next
-        if (e.key >= 0 && e.key <= 9) {
+    // Handle Input (Forward)
+    input.addEventListener('input', (e) => {
+        // Use regex to ensure only numbers (optional, but good for mobile)
+        // input.value = input.value.replace(/[^0-9]/g, ''); 
+
+        if (input.value.length === 1) {
+            // Move to next input
             if (index < 3) {
                 pinInputs[index + 1].focus();
             }
         }
+        // Check PIN
+        checkPin();
+    });
 
-        // Backspace focus prev
-        if (e.key === 'Backspace') {
+    // Handle Backspace (Backward)
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && input.value === '') {
             if (index > 0) {
                 pinInputs[index - 1].focus();
             }
         }
-
-        // Check PIN when all filled
-        checkPin();
     });
 });
 
