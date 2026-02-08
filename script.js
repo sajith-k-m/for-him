@@ -235,16 +235,42 @@ function initScrollReveal() {
         );
     });
 
+    // Initialize GSAP scroll trigger for letter if needed
     isScrollRevealInitialized = true;
 }
 
 // Hook into navigation
-// We don't override showPage directly because it's used internally.
-// Instead, let's just add listener to the specific transition.
-
 btnToLetter.addEventListener('click', () => {
-    // Wait for page transition to finish (0.6s) before refreshing/initializing scrolltrigger
     setTimeout(() => {
         initScrollReveal();
     }, 700);
+});
+
+// --- Click Heart Burst Effect ---
+document.addEventListener('click', (e) => {
+    const burstCount = 8;
+    for (let i = 0; i < burstCount; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('click-heart');
+        heart.innerHTML = '❤️';
+
+        // Position at click
+        heart.style.left = `${e.clientX}px`;
+        heart.style.top = `${e.clientY}px`;
+
+        // Random direction
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = Math.random() * 80 + 20; // Distance
+
+        const tx = Math.cos(angle) * velocity + 'px';
+        const ty = Math.sin(angle) * velocity + 'px';
+
+        heart.style.setProperty('--tx', tx);
+        heart.style.setProperty('--ty', ty);
+
+        document.body.appendChild(heart);
+
+        // Clean up
+        setTimeout(() => heart.remove(), 1000);
+    }
 });
