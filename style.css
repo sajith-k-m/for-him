@@ -224,17 +224,57 @@ h2.letter-title {
     text-transform: uppercase;
 }
 
-.btn-yes,
-.btn-next {
-    background: linear-gradient(45deg, #ff4d6d, #ff8fa3);
-    color: var(--white);
-    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+.btn-yes {
+    background: #fff;
+    color: var(--primary-color);
+    border-radius: 50px;
+    box-shadow:
+        0 8px 15px rgba(255, 255, 255, 0.4),
+        inset 0 -4px 0 rgba(0, 0, 0, 0.05),
+        0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    border: 3px solid #fff;
+    z-index: 1;
+    margin-top: 10px;
+    /* Space for top puffs */
+}
+
+.btn-yes::before,
+.btn-yes::after {
+    content: '';
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+/* Make it fluffy */
+.btn-yes::before {
+    width: 45px;
+    height: 45px;
+    top: -25px;
+    left: 10px;
+    box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.02);
+}
+
+.btn-yes::after {
+    width: 40px;
+    height: 40px;
+    top: -20px;
+    right: 15px;
+    box-shadow: 2px -2px 5px rgba(0, 0, 0, 0.02);
 }
 
 .btn-yes:hover,
 .btn-next:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(255, 77, 109, 0.6);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.6);
+}
+
+.btn-next {
+    background: linear-gradient(45deg, #ff4d6d, #ff8fa3);
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
 }
 
 .btn-no {
@@ -268,13 +308,25 @@ h2.letter-title {
 }
 
 /* Page 3: Letter */
+#antigravity-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
 #page-letter {
     justify-content: flex-start;
     padding-top: 60px;
 }
 
 .letter-content {
-    background-color: #fcf5e5;
+    background-color: rgba(252, 245, 229, 0.92);
+    /* Slightly transparent to show hearts */
     /* Gradient for lines: line at the very bottom of every 32px block */
     background-image: linear-gradient(to bottom, transparent, transparent 31px, rgba(0, 0, 0, 0.1) 31px, rgba(0, 0, 0, 0.1) 32px);
     background-size: 100% 32px;

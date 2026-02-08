@@ -117,6 +117,7 @@ function checkPin() {
             // Success
             errorMsg.classList.add('hidden');
             showPage('memories');
+            initDomeGallery();
         } else {
             // Error
             errorMsg.classList.remove('hidden');
@@ -129,6 +130,51 @@ function checkPin() {
                 pinInputs[0].focus();
             }, 500);
         }
+    }
+}
+
+// --- Dome Gallery Initialization ---
+let domeGalleryInitialized = false;
+function initDomeGallery() {
+    if (domeGalleryInitialized) return;
+    if (typeof DomeGallery !== 'undefined') {
+        const images = [
+            {
+                src: 'https://images.unsplash.com/photo-1755331039789-7e5680e26e8f?q=80&w=774&auto=format&fit=crop',
+                alt: 'Abstract art'
+            },
+            {
+                src: 'https://images.unsplash.com/photo-1755569309049-98410b94f66d?q=80&w=772&auto=format&fit=crop',
+                alt: 'Modern sculpture'
+            },
+            {
+                src: 'https://images.unsplash.com/photo-1755497595318-7e5e3523854f?q=80&w=774&auto=format&fit=crop',
+                alt: 'Digital artwork'
+            },
+            {
+                src: 'https://images.unsplash.com/photo-1755353985163-c2a0fe5ac3d8?q=80&w=774&auto=format&fit=crop',
+                alt: 'Contemporary art'
+            },
+            {
+                src: 'https://images.unsplash.com/photo-1745965976680-d00be7dc0377?q=80&w=774&auto=format&fit=crop',
+                alt: 'Geometric pattern'
+            },
+            {
+                src: 'https://images.unsplash.com/photo-1752588975228-21f44630bb3c?q=80&w=774&auto=format&fit=crop',
+                alt: 'Textured surface'
+            },
+            { src: 'https://pbs.twimg.com/media/Gyla7NnXMAAXSo_?format=jpg&name=large', alt: 'Social media image' }
+        ];
+
+        new DomeGallery('dome-gallery-root', {
+            images: images,
+            fit: 0.8,
+            minRadius: 600,
+            maxVerticalRotationDeg: 0,
+            segments: 34,
+            dragDampening: 2,
+            grayscale: true
+        });
     }
 }
 
@@ -243,8 +289,34 @@ function initScrollReveal() {
 btnToLetter.addEventListener('click', () => {
     setTimeout(() => {
         initScrollReveal();
+        initAntigravity();
     }, 700);
 });
+
+// --- Antigravity Initialization ---
+let antigravityInitialized = false;
+function initAntigravity() {
+    if (antigravityInitialized) return;
+    if (typeof AntigravityAnimation !== 'undefined') {
+        new AntigravityAnimation('antigravity-container', {
+            count: 300,
+            magnetRadius: 6,
+            ringRadius: 7,
+            waveSpeed: 0.4,
+            waveAmplitude: 1,
+            particleSize: 1.5,
+            lerpSpeed: 0.05,
+            color: '#ff4d6d', // Matching the button/heart theme
+            autoAnimate: true,
+            particleVariance: 1,
+            rotationSpeed: 0,
+            depthFactor: 1,
+            pulseSpeed: 3,
+            fieldStrength: 10
+        });
+        antigravityInitialized = true;
+    }
+}
 
 // --- Click Heart Burst Effect ---
 document.addEventListener('click', (e) => {
