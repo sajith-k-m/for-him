@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Valentine ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Placeholder for icons, relying on emojis mostly -->
+</head>
+<body>
+
+    <div class="container">
+        <!-- PAGE 1: PROPOSAL -->
+        <section id="page-proposal" class="page active">
+            <h1 class="title">Will you be my Valentine? 🌹</h1>
+            <div class="buttons">
+                <button id="btn-yes" class="btn btn-yes">Yes ❤️</button>
+                <button id="btn-no" class="btn btn-no">No 💔</button>
+            </div>
+        </section>
+
+        <!-- PAGE 2: SUCCESS / MEME -->
+        <section id="page-success" class="page hidden">
+            <h1 class="title">Good Choice! 😘</h1>
+            <div class="meme-container">
+                <!-- Placeholder for Meme. Using a cute gif for now -->
+                <img src="https://media.giphy.com/media/T86i6yDyOYz7J6dPhf/giphy.gif" alt="Happy Cat" class="meme-img">
+            </div>
+            <p class="subtitle">I knew you'd say yes!</p>
+            <button id="btn-to-letter" class="btn btn-next">Read my heart... 💌</button>
+        </section>
+
+        <!-- PAGE 3: THE LETTER -->
+        <section id="page-letter" class="page hidden">
+            <div class="scroll-container">
+                <h2 class="letter-title">To the Man I want to spend My Whole Life With ❤️</h2>
+                <div class="letter-content">
+                    <p>I still remember the very first time we met, how i fell in love with you and your smile and how everything happened unexpectedly...We both didn't expect, it was god who made it happen, because he knows we both need eachother to complete the love story he made..Thankyou for making me realize and making me feel that i deserve to be loved, to be Happy and to have someone amazing as you are.</p>
+                    
+                    <p>I want to grow old with you, not just because of i love you,but also because without youu.. I am nothing,. Even when we are old and frail, i want us to hold hands while we walk through the parks...</p>
+                    
+                    <p>Thankyou for accepting me, my flaws and mistakes that i made from the past.I am so lucky enough i have an ideal man that every girl dream of.</p>
+                    
+                    <p>Thankyou for coming into my life, for loving me unconditionally, for motivating me everyday to be beautiful, and for always hold ny hands so tight that i know you will never ever let me go. You see my very ugly and lazy look.. But you stll call me beautiful... Thankyou for being my one and only comfort space.</p>
+                </div>
+                
+                <div class="interaction-area">
+                    <p class="hint-text">Do you wanna see somethin..? click the heart 😍</p>
+                    <div id="heart-trigger" class="heart-pulse">❤️</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 4: HEART BLOWING ANIMATION -->
+        <section id="page-heart-animation" class="page hidden">
+            <div class="heart-center">
+                <div class="big-heart">❤️</div>
+                <!-- Particles will be added here via JS -->
+            </div>
+             <p class="blowing-text">Sending you all my love...</p>
+        </section>
+
+        <!-- PAGE 5: LOCK SCREEN -->
+        <section id="page-lock" class="page hidden">
+            <h2 class="lock-title">Enter our special code 🔐</h2>
+            <div class="pin-display">
+                <input type="password" class="pin-digit" maxlength="1" id="pin-1">
+                <input type="password" class="pin-digit" maxlength="1" id="pin-2">
+                <input type="password" class="pin-digit" maxlength="1" id="pin-3">
+                <input type="password" class="pin-digit" maxlength="1" id="pin-4">
+            </div>
+            <p id="error-msg" class="error-msg hidden">Incorrect Pin! Try again 😢</p>
+            <p class="hint-small">(Hint: 1430)</p>
+        </section>
+
+        <!-- PAGE 6: MEMORIES GALLERY -->
+        <section id="page-memories" class="page hidden">
+            <h1 class="gallery-title">Our Little Sweet Moments 📸</h1>
+            <p class="gallery-quote">"Every moment with you is a memory I treasure."</p>
+            
+            <div class="gallery-grid">
+                <!-- Placeholders for images -->
+                <div class="photo-card"><div class="placeholder">Photo 1</div></div>
+                <div class="photo-card"><div class="placeholder">Photo 2</div></div>
+                <div class="photo-card"><div class="placeholder">Photo 3</div></div>
+                <div class="photo-card"><div class="placeholder">Photo 4</div></div>
+                <div class="photo-card"><div class="placeholder">Photo 5</div></div>
+                <div class="photo-card"><div class="placeholder">Photo 6</div></div>
+            </div>
+            
+            <div class="footer">
+                <p>Forever & Always ❤️</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+/* Global Styles */
+:root {
+    --primary-color: #ff4d6d;
+    --secondary-color: #ff8fa3;
+    --bg-color: #fff0f3;
+    --text-color: #590d22;
+    --white: #ffffff;
+    --font-heading: 'Dancing Script', cursive;
+    --font-body: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: var(--font-body);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden; /* Prevent scrolling during animations */
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    height: 100vh;
+    position: relative;
+    background: linear-gradient(135deg, #fff0f3 0%, #ffe3e9 100%);
+    box-shadow: 0 0 20px rgba(255, 77, 109, 0.2);
+    overflow-y: auto; /* Allow scrolling for content if needed */
+    overflow-x: hidden;
+}
+
+/* Page Management */
+.page {
+    width: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex; /* Center content generally */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    padding: 20px;
+}
+
+.hidden {
+    display: none !important;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.active {
+    display: flex !important;
+    opacity: 1;
+    pointer-events: auto;
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Typography */
+h1.title, h2.letter-title, h1.gallery-title, h2.lock-title {
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+h1.title { font-size: 3rem; margin-bottom: 40px; }
+h2.letter-title { font-size: 2rem; margin-bottom: 20px; }
+
+/* Buttons */
+.buttons {
+    display: flex;
+    gap: 20px;
+    position: relative;
+    width: 100%;
+    justify-content: center;
+    height: 60px; /* Space for moving button */
+}
+
+.btn {
+    padding: 12px 30px;
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-weight: 600;
+}
+
+.btn-yes, .btn-next {
+    background-color: var(--primary-color);
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+}
+
+.btn-yes:hover, .btn-next:hover {
+    transform: scale(1.1);
+    background-color: #ff3355;
+    box-shadow: 0 6px 20px rgba(255, 77, 109, 0.6);
+}
+
+.btn-no {
+    background-color: var(--white);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    position: absolute; /* Allows movement */
+    /* Starting position is handled by flex container usually, but for absolute we need to center it initially relative to parent if we want. 
+       Actually, let's keep it static initially, then switch to absolute on first hover. 
+       Or easier: let it be simple flex item first, then switch to absolute movement. 
+       Standard trick: position relative on container, button absolute.
+    */
+    position: relative; 
+}
+
+/* Page 2: Success */
+.meme-container {
+    margin: 20px 0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.meme-img {
+    max-width: 100%;
+    max-height: 300px;
+    display: block;
+}
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 30px;
+}
+
+/* Page 3: Letter */
+#page-letter {
+    justify-content: flex-start; /* Allow scrolling from top */
+    padding-top: 40px;
+    overflow-y: auto;
+}
+
+.letter-content {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    line-height: 1.8;
+    font-size: 1rem;
+    text-align: justify;
+    margin-bottom: 30px;
+    border: 1px dashed var(--secondary-color);
+}
+
+.letter-content p {
+    margin-bottom: 15px;
+}
+
+.interaction-area {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.hint-text {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.heart-pulse {
+    font-size: 4rem;
+    cursor: pointer;
+    animation: heartbeat 1.5s infinite;
+    display: inline-block;
+    transition: transform 0.3s;
+}
+
+.heart-pulse:hover {
+    transform: scale(1.2);
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    15% { transform: scale(1.3); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.15); }
+    60% { transform: scale(1); }
+}
+
+/* Page 4: Heart Animation */
+.big-heart {
+    font-size: 8rem;
+    animation: blowAway 3s forwards;
+}
+
+.blowing-text {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeIn 1s 1s forwards;
+}
+
+@keyframes blowAway {
+    0% { transform: scale(1); opacity: 1; filter: blur(0); }
+    50% { transform: scale(1.5); opacity: 0.8; filter: blur(2px); }
+    100% { transform: scale(5); opacity: 0; filter: blur(10px); }
+}
+
+/* Page 5: Lock Screen */
+.pin-display {
+    display: flex;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.pin-digit {
+    width: 50px;
+    height: 60px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    font-size: 2rem;
+    text-align: center;
+    color: var(--primary-color);
+    background: white;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.pin-digit:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(255, 77, 109, 0.3);
+}
+
+.error-msg {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+/* Page 6: Memories */
+#page-memories {
+    justify-content: flex-start;
+    padding-top: 40px;
+    overflow-y: auto;
+}
+
+.gallery-quote {
+    font-style: italic;
+    color: var(--text-color);
+    margin-bottom: 30px;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    width: 100%;
+    padding-bottom: 40px;
+}
+
+.photo-card {
+    background: white;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    aspect-ratio: 1; /* Square photos */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(var(--rotation));
+    transition: transform 0.3s z-index 0.3s;
+}
+
+.photo-card:hover {
+    transform: scale(1.05) rotate(0deg) !important;
+    z-index: 10;
+}
+
+.photo-card:nth-child(odd) { transform: rotate(-3deg); }
+.photo-card:nth-child(even) { transform: rotate(3deg); }
+
+.placeholder {
+    color: #ccc;
+    font-size: 0.8rem;
+    text-align: center;
+    border: 2px dashed #eee;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+    h1.title { font-size: 2.5rem; }
+    .gallery-grid { grid-template-columns: 1fr; }
+}
