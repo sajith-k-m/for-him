@@ -145,8 +145,19 @@ function initDomeGallery() {
     if (typeof DomeGallery !== 'undefined') {
         // Generate array for 21 images
         const images = [];
+        const specialImg = 'assets/images/immmm.jpeg';
+
+        // Add the special image at the start to ensure visibility
+        images.push(specialImg);
+        images.push(specialImg);
+
         for (let i = 1; i <= 21; i++) {
             images.push(`assets/images/img${i}.jpg`);
+            // Add the special image frequently (every 3rd normal image)
+            if (i % 3 === 0) {
+                images.push(specialImg);
+                images.push(specialImg); // Add double dose for high priority
+            }
         }
 
         new DomeGallery('dome-gallery-root', {
