@@ -272,13 +272,14 @@ h2.letter-title {
         3px 3px 0 rgba(0, 0, 0, 0.1),
         0 10px 20px rgba(0, 0, 0, 0.1);
 
-    line-height: 1.9;
-    font-size: 1.05rem;
+    line-height: 1.6;
+    font-size: 1.4rem;
     text-align: justify;
     margin-bottom: 30px;
     position: relative;
     border: none;
     transform: rotate(-1deg);
+    font-family: var(--font-heading);
 }
 
 /* Tape effect */
