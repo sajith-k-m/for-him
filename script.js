@@ -39,7 +39,6 @@ btnYes.addEventListener('click', () => {
 });
 
 // The "No" Button Evasion Logic
-// The "No" Button Evasion Logic
 function moveButton() {
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
@@ -184,84 +183,62 @@ function initScrollReveal() {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const container = document.querySelector('.scroll-reveal-container');
-    const textEl = document.querySelector('.scroll-reveal-text');
+    // Target existing paragraphs in the letter
+    const paragraphs = document.querySelectorAll('.letter-content p');
     const scroller = document.querySelector('.container'); // The scrolling element
 
-    if (!container || !textEl || !scroller) return;
+    if (!paragraphs.length || !scroller) return;
 
-    // Split text into words
-    const text = textEl.textContent.trim();
-    textEl.innerHTML = '';
-    const words = text.split(/\s+/);
+    paragraphs.forEach((p, index) => {
+        // Split text into words if not already split
+        if (p.querySelector('.word')) return; // Avoid double initialization
 
-    words.forEach(word => {
-        const span = document.createElement('span');
-        span.className = 'word';
-        span.textContent = word + ' ';
-        textEl.appendChild(span);
+        const text = p.textContent.trim();
+        p.innerHTML = '';
+        const words = text.split(/\s+/);
+
+        words.forEach(word => {
+            const span = document.createElement('span');
+            span.className = 'word';
+            span.style.opacity = '0.3'; // Start faint
+            span.style.display = 'inline-block';
+            span.style.marginRight = '0.25em';
+            span.textContent = word;
+            p.appendChild(span);
+        });
+
+        const wordElements = p.querySelectorAll('.word');
+
+        // Animation: Fade in + Unblur + Slide Up slightly
+        gsap.fromTo(
+            wordElements,
+            {
+                opacity: 0.1,
+                filter: 'blur(4px)',
+                y: 10,
+                willChange: 'opacity, filter, transform'
+            },
+            {
+                ease: 'power2.out',
+                opacity: 1,
+                filter: 'blur(0px)',
+                y: 0,
+                stagger: 0.02,
+                scrollTrigger: {
+                    trigger: p,
+                    scroller: scroller,
+                    start: 'top 90%', // Start sooner
+                    end: 'bottom 70%',
+                    scrub: 1 // Smooth scrub
+                }
+            }
+        );
     });
-
-    const wordElements = textEl.querySelectorAll('.word');
-
-    // 1. Rotation Animation
-    gsap.fromTo(
-        textEl,
-        { transformOrigin: '0% 50%', rotation: 3 },
-        {
-            ease: 'none',
-            rotation: 0,
-            scrollTrigger: {
-                trigger: container,
-                scroller: scroller,
-                start: 'top bottom',
-                end: 'bottom bottom',
-                scrub: true
-            }
-        }
-    );
-
-    // 2. Opacity Animation
-    gsap.fromTo(
-        wordElements,
-        { opacity: 0.1, willChange: 'opacity' },
-        {
-            ease: 'none',
-            opacity: 1,
-            stagger: 0.05,
-            scrollTrigger: {
-                trigger: container,
-                scroller: scroller,
-                start: 'top 80%', // Start when top of container hits 80% viewport height
-                end: 'bottom 60%',
-                scrub: true
-            }
-        }
-    );
-
-    // 3. Blur Animation
-    gsap.fromTo(
-        wordElements,
-        { filter: 'blur(4px)' },
-        {
-            ease: 'none',
-            filter: 'blur(0px)',
-            stagger: 0.05,
-            scrollTrigger: {
-                trigger: container,
-                scroller: scroller,
-                start: 'top 80%',
-                end: 'bottom 60%',
-                scrub: true
-            }
-        }
-    );
 
     isScrollRevealInitialized = true;
 }
 
 // Hook into navigation
-const originalShowPage = showPage;
 // We don't override showPage directly because it's used internally.
 // Instead, let's just add listener to the specific transition.
 
@@ -271,5 +248,3 @@ btnToLetter.addEventListener('click', () => {
         initScrollReveal();
     }, 700);
 });
-
-
