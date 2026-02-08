@@ -39,22 +39,33 @@ btnYes.addEventListener('click', () => {
 });
 
 // The "No" Button Evasion Logic
+// The "No" Button Evasion Logic
 function moveButton() {
-    const x = Math.random() * (window.innerWidth - btnNo.offsetWidth - 40); // 40px buffer
-    const y = Math.random() * (window.innerHeight - btnNo.offsetHeight - 40);
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const btnWidth = btnNo.offsetWidth;
+    const btnHeight = btnNo.offsetHeight;
 
-    btnNo.style.position = 'absolute';
-    btnNo.style.left = `${x}px`;
-    btnNo.style.top = `${y}px`;
+    // Safety margins
+    const maxLeft = viewportWidth - btnWidth - 20;
+    const maxTop = viewportHeight - btnHeight - 20;
+
+    // Ensure random position is positive
+    const randomX = Math.max(10, Math.random() * maxLeft);
+    const randomY = Math.max(10, Math.random() * maxTop);
+
+    btnNo.style.position = 'fixed'; // Use fixed to be relative to VP
+    btnNo.style.left = `${randomX}px`;
+    btnNo.style.top = `${randomY}px`;
+    btnNo.style.zIndex = '1000';
 }
 
 // Mouse for desktop
 btnNo.addEventListener('mouseover', moveButton);
 
-// Touch for mobile (using touchstart/touchend to prevent checking "click" if they managed to tap it)
-// We want it to move BEFORE they lift their finger, essentially blocking the click.
+// Touch for mobile
 btnNo.addEventListener('touchstart', (e) => {
-    e.preventDefault(); // Prevents the click from firing
+    e.preventDefault();
     moveButton();
 });
 

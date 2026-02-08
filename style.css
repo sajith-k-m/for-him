@@ -514,6 +514,21 @@ h2.letter-title {
         width: 80%;
         margin: 0 auto;
     }
+
+    /* Better button sizing for mobile */
+    .buttons {
+        height: auto;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .btn {
+        width: 80%;
+        /* Make buttons wide but not full width */
+        padding: 12px 0;
+        font-size: 1rem;
+    }
 }
 
 /* Scroll Reveal Section */
